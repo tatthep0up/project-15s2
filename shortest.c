@@ -4,11 +4,6 @@
 #include "Pro_head.h"
 
 
-#define MAX 10
-#define MAX_STEP 8
-#define TEMP 0
-#define PERM 1
-#define INFINITY 9999
 /*
 int create_graph(void);
 int display(void);
