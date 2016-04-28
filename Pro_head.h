@@ -8,6 +8,11 @@
 #define PERM 1
 #define INFINITY 9999
 
+struct node {
+    int predecessor;
+    int dist; /*minimum distance of node from start*/
+    int status;
+} node_t;
 
 void create_graph();
 int Question_where(int start, int dest);

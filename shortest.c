@@ -9,11 +9,7 @@ int create_graph(void);
 int display(void);
 int findpath(int,int,int[],int*);
 */
-struct node {
-    int predecessor;
-    int dist; /*minimum distance of node from start*/
-    int status;
-} node_t;
+
 
 int adj[MAX][MAX];
 
@@ -31,7 +27,7 @@ int Question_where(int start, int dest)// **************************************
     
 
     count = findpath(start, dest, path, &shortdist);
-    printf("---%d\n",count );
+    // printf("---%d\n",count );
     if (shortdist != 0) {
         printf("\n");
         printf("Shortest distance is : %d metres\n", shortdist);
