@@ -3,48 +3,34 @@
 
 #include "Pro_head.h"
 
-
 /*
 int create_graph(void);
 int display(void);
 int findpath(int,int,int[],int*);
 */
 
-
-int adj[MAX][MAX];
-
-int Question_where(int start, int dest)// ************************************************** main
+int Question_where(int start, int dest, int path[], int shortdist) // ************************************************** main
 {
     int i;
-    int path[MAX]; // MAX = 10
-    int shortdist, count;
+    int count;
+    int adj[MAX][MAX];
 
-    create_graph();// step 1 ป้อนข้อมูล node, edge และ weight
-    //printf("The adjacency matrix is :\n");
-    //display(); // โชว์ข้อมูล weight ที่ได้ทำการป้อนเข้าไป
+    create_graph(adj);// สร้างกราฟแผนที่
 
-    // while (1) {
-    
 
-    count = findpath(start, dest, path, &shortdist);
-    // printf("---%d\n",count );
-    if (shortdist != 0) {
-        printf("\n");
-        printf("Shortest distance is : %d metres\n", shortdist);
-        printf("Shortest Path is : ");
-        for (i = count; i > 1; i--)
-            printf("%d---->", path[i]);
-        printf("%d", path[i]);
-        printf("\n");
-    } else
-        printf("There is no path from start to destination node\n");
-    printf("___________________________________________\n");
-    /*End of while*/
-    //map(path);
-    return 0;
+    count = findpath(start, dest, path, &shortdist, adj);
+
+    if (shortdist != 0) {//ระยะทางทั้งหมดไม่เท่ากับ 0
+        //shortdist = ระยะทางทั้งหมด
+        //path = จุดที่จะไป
+        return 0;
+    } else {
+        return 1;
+    }
+
 }
 
-void create_graph()//**************************************************** create_graph
+void create_graph(int adj[][])//**************************************************** create_graph
 {
     adj[1][2] = 30;
     adj[2][1] = 30;
@@ -73,9 +59,9 @@ void create_graph()//**************************************************** create
     adj[7][8] = 20;
     adj[8][7] = 20;
 
-}/*End of create_graph()*/
+}
 
-int findpath(int start, int dest, int path[MAX], int *sdist)
+int findpath(int start, int dest, int path[MAX], int *sdist, int adj[][])
 {
     struct node state[MAX];
     int i, min, count = 0, current, newdist, u, v;

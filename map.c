@@ -1,18 +1,15 @@
 /* 
 * @Author: p_h_a_000
 * @Date:   2016-03-21 12:13:22
-* @Last Modified by:   p_h_a_000
-* @Last Modified time: 2016-04-19 16:11:26
+* @Last Modified by:   Asus
+* @Last Modified time: 2016-04-28 22:53:27
 */
 
 #include "Pro_head.h"
 
-
-int map() {
-    int i,n = 0;
-    char array_map[4500];
-    char *array_com_to_math[60],*array_gem_to_bio[30],*array_bio_to_chem[30],*array_phy_to_ic[30];
-    int n_com_to_math = 0;
+void create_map(char array_map[]) {
+    
+    int i;
     for (i = 0; i <=  4500; i++)
     {
         array_map[i] = ' ';
@@ -22,142 +19,7 @@ int map() {
             array_map[i] = '\n';
         }
 
-        //______________________________________________ ถนนในแกน Y
-        
-        if (i % 150 == 10||i % 150 == 15)
-        {
-            array_map[i] = '0';
-        }
-        if (i % 150 == 11||i % 150 == 12||i % 150 == 13||i % 150 == 14)
-        {
-            array_map[i] = '.';
-        }
-        if (i % 150 == 95||i % 150 == 100)
-        {
-            array_map[i] = '0';
-        }
-        if (i % 150 == 96||i % 150 == 97||i % 150 == 98||i % 150 == 99)
-        {
-            array_map[i] = '.';
-        }
-
-        //______________________________________________ ถนนในแกน X
-
-        if (i >= 466 && i <=544)
-        {
-            array_map[i] = '0';
-        }
-        if (i >= 161 && i <=249)
-        {
-            array_map[i] = '0';
-        }
-        if (i >= 316 && i <=394)
-        {
-            array_map[i] = '.';
-            if (i >= 326 && i < 373){
-                array_com_to_math[n_com_to_math] = &array_map[i];
-                n_com_to_math++;
-            }else if (i == 373){
-                array_com_to_math[n_com_to_math] = &array_map[i];
-                array_com_to_math[n_com_to_math+1] = '\0'; 
-                n_com_to_math = n_com_to_math+1;
-            }
-        }
-        //------------------------------
-        if (i >= 3916 && i <= 3995)
-        {
-            array_map[i] = '0';
-        }
-        if (i >= 4066 && i <=4146)
-        {
-            array_map[i] = '.';
-            if (i >= 4076 && i < 4101){
-                array_gem_to_bio[n] = &array_map[i];
-                n++;
-            }else if (i == 4101){
-                array_gem_to_bio[n] = &array_map[i];
-                array_gem_to_bio[n+1] = '\0'; 
-                n = 0;
-            }
-
-            if (i >= 4102 && i < 4127){
-                array_bio_to_chem[n] = &array_map[i];
-                n++;
-            }else if (i == 4127){
-                array_bio_to_chem[n] = &array_map[i];
-                array_bio_to_chem[n+1] = '\0'; 
-                n = 0;
-            }
-
-        }
-        if (i >= 4211 && i <4301)
-        {
-            array_map[i] = '0';
-        }
-        //-----------------------------
-        if (i >= 2500 && i <2550)
-        {
-            array_map[i] = '0';
-        }
-        if (i >= 2650 && i <2700)
-        {
-            array_map[i] = '.';
-            if (i >= 2664 && i < 2690){
-                array_phy_to_ic[n] = &array_map[i];
-                n++;
-            }else if (i == 2690){
-                array_phy_to_ic[n] = &array_map[i];
-                array_phy_to_ic[n+1] = '\0'; 
-                n = 0;
-            }
-
-
-        }
-        if (i >= 2800 && i <2850)
-        {
-            array_map[i] = '0';
-        }
-
-        //------------------------------ สิ่งที่ต้องทับ ถนน
-        if (i % 150 == 10||i % 150 == 15)
-        {
-            array_map[i] = '0';
-            if (i == 315)
-            {
-                array_map[i] = '.';
-            }
-        }
-        if (i % 150 == 11||i % 150 == 12||i % 150 == 13||i % 150 == 14)
-        {
-            array_map[i] = '.';
-        }
-        if (i % 150 == 95||i % 150 == 100)
-        {
-            array_map[i] = '0';
-            if (i == 395)
-            {
-                array_map[i] = '.';
-            }
-        }
-        if (i % 150 == 96||i % 150 == 97||i % 150 == 98||i % 150 == 99)
-        {
-            array_map[i] = '.';
-        }
-        if (i==2650)
-        {
-            array_map[i] = '.';   
-        }
-        if (i==4065)
-        {
-            array_map[i] = '.';   
-        }
-        if (i==4145)
-        {
-            array_map[i] = '.';   
-        }
-
-
-
+       
         //___________________________________________ เว้นข้างบนและล่าง
 
         if (i >= 0 && i < 150)
@@ -308,7 +170,7 @@ int map() {
         {
             array_map[i] = 'T';
         }
-        if (i==2186)
+        if (i==2187)
         {
             array_map[i] = '3';
         }
@@ -706,28 +568,8 @@ int map() {
     }
 
     array_map[i] = '\0';
-    char *new_arr[100];
-    int x = 0;
-    for (i = 390; i<= 397 ;i++){
-        new_arr[x] = &array_map[i];
-        x++;
-    }
-    for (i = 547; i<= 547*5; i+=150){
-        new_arr[x] = &array_map[i];
-        x++;
-    }
-    //new_arr[x] = &array_map[547];
-    //x++;
-    //new_arr[x] = &array_map[697];
 
-    
-    //547
-    for (i = 0; i < x; i++){
-        *new_arr[i] = 128;
-    }
-    //array_map[547] = 'x';
-    
-    printf("%s\n",array_map);
+    //printf("%s\n",array_map);
 
     return 0;
 }
